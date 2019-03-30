@@ -1,0 +1,57 @@
+use maskotaweb_db;
+-- ---------------------------------------------- 
+-- REPORTE ATENCIONES DEL SISTEMA
+-- ----------------------------------------------
+DROP PROCEDURE IF EXISTS SP_REP_ATTENTION;
+DELIMITER $$
+CREATE PROCEDURE SP_REP_ATTENTION(
+	IN p_token 		VARCHAR(255),	-- TOKEN USUARIO
+	IN P_PATIENT 	VARCHAR(50), 			-- ID PACIENTE
+	IN P_DATE_INI 	DATE, 			-- FECHA INICIO
+	IN P_DATE_END 	DATE 			-- FECHA FIN
+)
+BEGIN	
+	DECLARE P_ID_USR_SSN	INT;
+	SELECT FN_IS_USER_AUTHORIZED(p_token) INTO P_ID_USR_SSN;
+	IF P_ID_USR_SSN >0 THEN
+		SELECT 
+		(
+			SELECT U.NAMES FROM 
+			vet_patient_owners OW INNER JOIN 
+			sys_usr U ON OW.ID_USR = U.ID_USR
+			WHERE
+			OW.ID_PAT = P.ID_PAT
+			LIMIT 0,1
+		) OWNER,
+		(SELECT KP.NAME FROM vet_kind_patient KP WHERE KP.id_kind_pat = P.id_kind_pat) TIPO,
+		P.NAME				NOMBRES,
+		CASE WHEN P.SEX = 1 THEN 'Macho'
+			 WHEN P.SEX = 2 THEN 'Hembra' END	
+												SEXO,
+		P.BREED				RAZA,
+		P.COLOR				COLOR,
+		P.DATE_BORN			FECHA_NACIMIENTO,
+		P.YEAR				ANIOS,
+		P.MONTH				MESES,
+		HC.DATE_REG			FECHA_ATENCION,
+		-- HC.STATURE			ESTATURA,
+		-- HC.WEIGHT			PESO,
+		HC.DIAGNOSTIC		DIAGNOSTICO,
+		HC.PAYMENT			PAGO,
+		HC.ID_CLIN_SGN		SIGNO_CLINICO
+		/*,
+		CASE WHEN HC.STATE  = 1 THEN 'Pendiente' 
+			 WHEN HC.STATE  = 2 THEN 'Cancelado'
+			 WHEN HC.STATE  = 3 THEN 'Fuera de Fecha'
+		END	  											ESTADO_ATENCION
+		*/
+		FROM 
+			vet_history_clinic HC INNER JOIN 
+			vet_patient P	ON HC.ID_PAT = P.ID_PAT
+		WHERE 
+		P.NAME 			like CASE WHEN P_PATIENT IS NULL OR P_PATIENT = '' THEN P.NAME ELSE  CONCAT('%',P_PATIENT,"%") END  AND
+		HC.DATE_REG BETWEEN P_DATE_INI AND P_DATE_END 
+		ORDER BY P.ID_PAT, HC.DATE_REG DESC;
+	END IF;
+END$$
+DELIMITER ;

@@ -1,0 +1,9 @@
+database:
+user: demo1_admin_maskotaweb
+password: @m4Sk0t4W3b!01
+
+
+
+
+  
+  
