@@ -1,0 +1,117 @@
+<div class="col-sm-12 col-md-12">
+<div class="row col-md-12 col-sm-12 title-page">
+    <h5>{{titlePage}}</h5>
+</div>
+<br />
+<div class="row col-md-12 col-sm-12 filter-container">
+<form class="form-inline" action="#">    
+    <div class="form-group">
+      &nbsp;&nbsp;
+      <label for="input-user" >Usuario:</label>&nbsp;&nbsp;
+      <input id ="input-user" [(ngModel)] = "filterName" name="filterName" autofocus="autofocus" 
+      class="form-control form-control-sm" type="text"  />
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;    
+        <label for ="input-role" >P&eacute;rfil:</label>&nbsp;&nbsp;
+        <select id ="input-role_" [(ngModel)] = "filterRole" name="filterRole"
+         class="form-control select-picker form-control-sm" data-live-search="true" >
+            <option *ngFor="let item of listRoles" [ngValue]="item">
+                {{item.name}}
+            </option>
+        </select>  
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;
+        <label  >Tipo Documento:</label>&nbsp;&nbsp;
+        <select [(ngModel)] = "filterTypeDoc" name="filterTypeDoc"
+         class="form-control select-picker form-control-sm"  >
+            <option *ngFor="let item of listTypeDocument" [ngValue]="item">
+                {{item.name}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;
+        <label for ="input-state" >Estado:</label>&nbsp;&nbsp;
+        <select id ="input-state" [(ngModel)] = "filterState" name="filterState"
+         class="form-control select-picker form-control-sm"  >
+            <option *ngFor="let item of listState" [ngValue]="item">
+                {{item.name}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;
+        <button class="btn btn-info form-control-sm" (click)="getListUser()" >
+          <div class="content-button">
+            <i class="fa fa-search" aria-hidden="true"></i>&nbsp;Buscar
+          </div>
+        </button>
+        &nbsp;&nbsp;
+        <button class="btn btn-info form-control-sm"  (click)="newUser();">
+            <div class="content-button">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Nuevo
+            </div>
+        </button>
+    </div>
+    <br />  
+</form>
+</div>
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <br /> 
+    <p-table #dtUsers [value]="listUsers" [paginator]="true" [rows]="8"  >
+        <ng-template pTemplate="header">
+            <tr>
+              <th class="ui-column ui-column-1">C&oacute;digo</th>
+              <th class="ui-column ui-column-2">P&eacute;rfil</th>
+              <th class="ui-column ui-column-3">Tipo Doc.</th>
+              <th class="ui-column ui-column-4">N° Doc.</th>
+              <th class="ui-column ui-column-5">Usuario</th>
+              <th class="ui-column ui-column-6">Email</th>
+              <th class="ui-column ui-column-8">Celular</th>
+              <th class="ui-column ui-column-9">Tel&eacute;f. Fijo</th>
+              <th class="ui-column ui-column-10">Direcci&oacute;n</th>
+              <th class="ui-column ui-column-11">Estado</th>
+              <!--<th class="ui-column ui-column-8">Foto</th>-->
+              <th class="ui-column ui-column-12">Opciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+            <td style="text-align:center;">{{user.userId}}</td>
+            <td>{{user.role.name}}</td>
+            <td style="text-align:center;">{{user.typeNif.name}}</td>
+            <td>{{user.numberNif}}</td>
+            <td>{{user.names}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.movilNumber}}</td>
+            <td>{{user.landLine}}</td>
+            <td>{{user.address}}</td>
+            <td style="text-align:center;">{{user.estate.name}}</td>
+            <!--<td style="text-align:center;">
+              <img src="{{root_path_image}}{{user.photo}}" width="40" height="40" />
+            </td>-->
+            <td>
+                &nbsp;&nbsp;
+              <button class="btn btn-info btn-sm" style="margin-top:3px;" (click)="editUser(user)" 
+              placement="top" ngbTooltip="Modificar Datos"  >
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+              &nbsp;&nbsp;&nbsp;
+              <button class="btn btn-info btn-sm" (click)="showModalCredential(user)" 
+                placement="top" ngbTooltip="Asignar o Modificar Contraseña" 
+                style="margin-top:3px;" ><i class="fa fa-address-card" aria-hidden="true"></i></button>  
+            </td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
+  </div>
+</div>
+
+<!-- MODALES -->
+<app-modal-user [parentObj] = "parentComponent" ></app-modal-user>
+<app-modal-credential-user [parentObj] = "parentComponent"></app-modal-credential-user>
+
+

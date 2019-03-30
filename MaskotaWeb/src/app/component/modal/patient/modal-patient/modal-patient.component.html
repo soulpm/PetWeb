@@ -1,0 +1,149 @@
+<!-- MODAL PATIENT -->
+<div id="modalPatient" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <i class="fa fa-2x fa-file-text-o" style="color:#fff;" aria-hidden="true"></i>
+            &nbsp;&nbsp;
+            <h4 class="modal-title">{{parent.titleModal}}</h4>  
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form >
+                <div *ngIf="messageModal.showMessage" class="alert {{messageModal.typeMessage}}" id="message-modal">
+                    <strong>{{messageModal.titleMessage}}</strong>
+                    <p> {{messageModal.message}}</p>
+                </div>
+            <div class="container-group">
+                <div class="group-title">Datos Paciente:</div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                        <label >Nombres:</label>
+                        <input  [(ngModel)]="parent.entityEditParent.names" maxlength="100" *ngIf="!parent.isEditMode"  
+                        name="inputName" class="form-control form-control-sm" placeholder="" />
+                        <input  [(ngModel)]="parent.entityEditParent.names" maxlength="100" *ngIf="parent.isEditMode" 
+                        name="inputName" class="form-control form-control-sm" placeholder="" readonly="readonly" /> 
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label for ="input-role" >Tipo:</label>&nbsp;&nbsp;
+                        <select id ="input-role" [(ngModel)] = "parent.entityEditParent.kindPatient.idKind"
+                            name="inputKind" class="form-control  form-control-sm select-picker" 
+                            data-live-search="true" >
+                            <option *ngFor="let item of parent.listKindRegister" [value]="item.idKind" >
+                                {{item.name}}
+                            </option>
+                        </select>  
+                    </div>
+                    <div class="col-md-3 col-sm-3 form-group">
+                        <label>Sexo:</label>
+                        <select id ="input-role" [(ngModel)] = "parent.entityEditParent.sex.idSex"
+                            name="inputSex" class="form-control form-control-sm select-picker" 
+                            data-live-search="true" >
+                            <option *ngFor="let item of listPatientSex" [value]="item.idSex" >
+                                {{item.name}}
+                            </option>
+                        </select>  
+                    </div>   
+                    <div class="col-md-3 col-sm-3 form-group">
+                        <label>Raza:</label>
+                        <input  [(ngModel)]="parent.entityEditParent.breed" 
+                        name="inputBreed" max="15" maxlength="15" type="string"
+                        class="form-control form-control-sm" placeholder="" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 form-group">
+                        <label>Color:</label>
+                        <input  [(ngModel)]="parent.entityEditParent.color" 
+                         name="inputColor" max="15" maxlength="15" type="string"
+                         class="form-control form-control-sm" placeholder="" >
+                    </div>
+                    <div class="col-md-4 col-sm-4 form-group">
+                        <label>Edad (A&ntilde;os y/o Meses:)</label>
+                        <div style="width:100%;">
+                        <input  [(ngModel)]="parent.entityEditParent.year" 
+                        name="inputAge" max="2" maxlength="2" type="number" style="width:90px;float:left;margin-right:10px"
+                        class="form-control form-control-sm" placeholder="Años" (ngModelChange)="verifyDatePatient()"   />
+                        <input  [(ngModel)]="parent.entityEditParent.month"  
+                        name="inputMonth" max="2" maxlength="2" type="number" style="width:90px;;"
+                        class="form-control form-control-sm" placeholder="Meses" (ngModelChange)="verifyDatePatient()"  />    
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 form-group">
+                        <label>Fecha Nacimiento:</label>
+                        <input [(ngModel)]="parent.inputDateBorn" 
+                        name="parent.inputDateBorn" 
+                        ngbDatepicker #fb="ngbDatepicker"
+                        (focus)="fb.open()" readonly="readonly" 
+                        class="form-control form-control-sm input-date" readonly="readonly" type="text"  />
+                    </div>
+                </div>
+            </div>
+            <div class="container-group" *ngIf="!parent.isEditMode">
+                <div class="group-title">Datos Propietario:</div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <label >Nombre Propietario:</label>
+                        <input  [(ngModel)]="parent.userOwner.names" maxlength="100"  
+                            id="inputName" name="inputName" class="form-control form-control-sm" placeholder=""> 
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for ="input-type-nif" >Tipo Documento:</label>&nbsp;&nbsp;
+                        <select id ="input-type-nif" [(ngModel)] = "parent.userOwner.typeNif.idDocument" name="inputTypeDoc"
+                            class="form-control select-picker form-control-sm"  >
+                            <option *ngFor="let item of listTypeDocumentInput" [value]="item.idDocument">
+                                {{item.name}}
+                            </option>
+                        </select>   
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>N&uacute;mero Documento:</label>
+                        <input  [(ngModel)]="parent.userOwner.numberNif" 
+                         name="inputNif" max="15" maxlength="15" type="number"
+                         class="form-control form-control-sm" placeholder="" >
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Email:</label>
+                        <input type="email"  maxlength="60"
+                        [(ngModel)]="parent.userOwner.email" name="inputEmail"
+                         email="true" class="form-control form-control-sm" placeholder="">
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <label for ="input-sex"  >G&eacute;nero:</label>&nbsp;&nbsp;
+                        <select id ="input-sex"  
+                            [(ngModel)] = "parent.userOwner.sex" 
+                            name="inputSex" class="form-control form-control-sm select-picker"  >
+                            <option *ngFor="let item of listSexInput" [value]="item.idRegister"  >
+                                {{item.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Direcci&oacute;n:</label>
+                        <input type="text"  maxlength="60"
+                        [(ngModel)]="parent.userOwner.address" name="inputAddress"
+                         class="form-control form-control-sm" placeholder="">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Celular:</label>
+                        <input type="text"  maxlength="60"
+                        [(ngModel)]="parent.userOwner.movilNumber" name="inputMovilNumber"
+                         class="form-control form-control-sm" placeholder="">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Tel&eacute;fono Fijo:</label>
+                        <input type="email"  maxlength="60"
+                        [(ngModel)]="parent.userOwner.landLine" name="inputLandLine"
+                        class="form-control form-control-sm" placeholder="">
+                    </div>
+                </div>
+            </div>      
+          </form>
+          </div>
+          <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" (click)="save()" class="btn btn-info">Grabar</button>  
+          </div>
+        </div>
+    </div>
+</div>

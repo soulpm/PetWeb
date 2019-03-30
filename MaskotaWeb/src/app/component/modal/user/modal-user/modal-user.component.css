@@ -1,0 +1,31 @@
+.alert-danger{
+    background:red;
+    padding: 3px 3px 3px 3px;
+    border-radius: 10px; 
+    color:#fff;
+    font-weight: 500;
+}
+.alert-danger strong{
+    margin: 3px 3px 3px 3px;
+}
+.alert-danger p{
+    margin: 3px 3px 3px 3px;
+}
+.alert-success{
+    background:#009900;
+    color:#fff;
+    font-weight: 500;
+    padding: 3px 3px 3px 3px;
+    border-radius: 10px; 
+}
+.alert-success strong{
+    margin: 3px 3px 3px 3px;
+}
+.alert-success p{
+    margin: 3px 3px 3px 3px;
+}
+.cnt-loading
+{
+    width:80px;
+    height: 80px;
+}

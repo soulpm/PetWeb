@@ -1,0 +1,116 @@
+<div class="col-sm-12 col-md-12">
+<div class="row col-md-12 col-sm-12 title-page">
+    <h5>{{titlePage}}</h5>
+</div>
+<br />
+<div class="row col-md-12 col-sm-12 form-inline filter-container">
+    <div *ngIf="showMessageModal" class="form-group col-md-12 col-sm-12 alert {{typeAlertModal}}"
+     style="margin-bottom:10px;" id="message-login">
+        <strong>{{titleMessageModal}}</strong>
+        <p> {{messageModal}}</p>
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;
+        <label for="filterPatient">Nombre Paciente:</label>&nbsp;&nbsp;
+        <input [(ngModel)] = "filterPatient" id="filterPatient" name="filterPatient" autofocus="autofocus" 
+        class="form-control" type="text"  />
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label for="filterDateIni">Fecha Inicio:</label>&nbsp;&nbsp;
+        <input [(ngModel)] = "filterDateIni" id="filterDateIni" name="filterDateIni" 
+        ngbDatepicker #fi="ngbDatepicker" 
+        (focus)="fi.open()" readonly="readonly" 
+        class="form-control input-date" readonly="readonly" type="text"  />
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label for="filterDateEnd">Fecha Fin:</label>&nbsp;&nbsp;
+        <input [(ngModel)] = "filterDateEnd" id="filterDateEnd" name="filterDateEnd" 
+        ngbDatepicker #ff="ngbDatepicker"
+        (focus)="ff.open()" readonly="readonly" 
+        class="form-control input-date" readonly="readonly" type="text"  />
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" (click)="showReport()" class="btn btn-info btn">
+                <i class="fa fa-search" aria-hidden="true"></i>&nbsp;Ver Reporte
+        </button>
+        &nbsp;
+        <button type="button" (click)="exportReport()" class="btn btn-info btn">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;Exportar
+        </button>
+     </div>
+</div>
+<div class="row col-md-12 col-sm-12" style="margin:20px auto;">
+        <p-table [value]="listReport" [paginator]="true" [rows]="8" >
+        <ng-template pTemplate="header">
+            <tr>
+              <th class="ui-column ui-column-2">Propietario</th>
+              <th class="ui-column ui-column-3">Tipo</th>
+              <th class="ui-column ui-column-4">Paciente</th>
+              <th class="ui-column ui-column-5">Sexo</th>
+              <th class="ui-column ui-column-6">Raza</th>
+              <th class="ui-column ui-column-7">Color</th>
+              <th class="ui-column ui-column-8">Fecha Nacimiento</th>
+              <th class="ui-column ui-column-9">Edad</th>
+              <th class="ui-column ui-column-9">Fecha Atenci&oacute;n</th>
+              <th class="ui-column ui-column-9">Signos Cl&iacute;nicos</th>
+              <th class="ui-column ui-column-9">Monto Pago</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+              <td style="text-align:center;">{{item.owner}}</td>
+              <td style="text-align:center;">{{item.kind}}</td>
+              <td>{{item.patient}}</td>
+              <td style="text-align:center;">{{item.sex}}</td>
+              <td style="text-align:center;">{{item.breed}}</td>
+              <td style="text-align:center;">{{item.color}}</td>
+              <td style="text-align:center;">{{item.dateBorn | date:'dd/MM/yyyy'}}</td> 
+              <td style="text-align:center;">{{item.year}} a&ntilde;o(s) y {{item.month}} meses</td> 
+              <td style="text-align:center;">{{item.dateAttention | date:'dd/MM/yyyy hh:mm:ss'}}</td> 
+              <td><div style="word-wrap:break-word;width:80%">{{item.state}}</div></td>
+              <td>{{item.payment}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+        <!--
+            <table class="table table-lg  table-hover" >
+            <thead class="thead-dark"> 
+             <tr style="text-align:center;">
+               <th>Item</th>
+               <th>Propietario</th>
+               <th>Tipo</th>
+               <th>Paciente</th>
+               <th>Sexo</th>
+               <th>Raza</th>
+               <th>Color</th>
+               <th>Fecha Nacimiento</th>
+               <th>Edad</th>
+               <th>Fecha Atenci&oacute;n</th>
+               <th>Signos Cl&iacute;nicos</th>
+               <th>Monto Pago</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr *ngFor="let item of listReport; let idx = index">
+                <td>{{idx+1}}</td>
+                <td>{{item.owner}}</td>
+                <td>{{item.kind}}</td>
+                <td>{{item.patient}}</td>
+                <td>{{item.sex}}</td>
+                <td>{{item.breed}}</td>
+                <td>{{item.color}}</td>
+                <td>{{item.dateBorn  | date:'dd/MM/yyyy'}}</td>
+                <td>{{item.year}} a&ntilde;os y {{item.month}} meses</td>
+                <td>{{item.dateAttention | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                <td>{{item.state}}</td>
+                <td>{{item.payment}}</td>
+             </tr>
+            </tbody>
+         </table>
+        -->
+    </div>
+</div>

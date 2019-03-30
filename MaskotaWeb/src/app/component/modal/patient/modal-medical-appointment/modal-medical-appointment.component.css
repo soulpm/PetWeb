@@ -1,0 +1,65 @@
+.container-scroll{
+    overflow-y: scroll;
+    overflow-x:hidden;
+    height: 450px;
+}
+.alert-danger{
+    background:red;
+    color:#fff;
+    font-weight: 500;
+    padding: 3px 3px 3px 3px;
+    border-radius: 10px; 
+}
+.alert-danger strong{
+    margin: 3px 3px 3px 3px;
+}
+.alert-danger p{
+    margin: 3px 3px 3px 3px;
+}
+.alert-success{
+    background:#009900;
+    color:#fff;
+    font-weight: 500;
+    padding: 3px 3px 3px 3px;
+    border-radius: 10px; 
+}
+.alert-success strong{
+    margin: 3px 3px 3px 3px;
+}
+.alert-success p{
+    margin: 3px 3px 3px 3px;
+}
+.cnt-loading
+{
+    width:80px;
+    height: 80px;
+}
+.item-clinic-sign{
+    cursor: pointer;
+    list-style-type: none;
+    float: left;
+}
+.item-clinic-sign input{
+    width   : 18px;
+    height  : 18px;
+}
+.item-clinic-sign label{
+    position: relative;
+    top: -3px;
+    left:-3px;
+}
+.item-opt{
+    cursor: pointer;
+    list-style-type: none;
+    float: left;
+}
+.item-opt input{
+    width   : 18px;
+    height  : 18px;
+}
+.item-opt label{
+    margin-left: -8px;
+    margin-right:25px;
+    margin-top:-7px;
+    
+}

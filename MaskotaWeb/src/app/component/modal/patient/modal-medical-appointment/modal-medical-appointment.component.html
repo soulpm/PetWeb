@@ -1,0 +1,473 @@
+<!-- MODAL PATIENT -->
+<div id="modalMedicalAppointment" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog modal-lg modal-custom">
+        <div class="modal-content">
+          <div class="modal-header">
+            <i class="fa fa-file-text-o fa-2x icon-modal-title" aria-hidden="true"></i>  
+            <h4 class="modal-title">{{parent.titleModal}}</h4>  
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body" *ngIf="parent.historyClinicDetailSelect==null">
+            <form >
+                <div *ngIf="messageModal.showMessage" class="alert {{messageModal.typeMessage}}" id="message-modal">
+                    <strong>{{messageModal.titleMessage}}</strong>
+                    <p> {{messageModal.message}}</p>
+                </div>
+                <div class="container-scroll">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 form-inline">
+                                <div class="form-group col-md-6 col-sm-6">
+                                <ul> 
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Vacunación Completa"  >
+                                        <input type="checkbox" id="chk_O_V" [(ngModel)]="parent.checkVaccineCompleted"
+                                        name="checkVaccineCompleted"  />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_O_V">V</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Desparacitado" >
+                                        <input 
+                                        type="checkbox" id="chk_O_D" [(ngModel)]="parent.checkDesparacitado"
+                                        name="checkDesparacitado" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_O_D">D</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Ya ha tenido Operaciones"  >
+                                        <input 
+                                        type="checkbox" id="chk_O_O" [(ngModel)]="parent.checkWithOperacion"
+                                        name="checkWithOperacion" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_O_O">O</label> 
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <h6>C&oacute;mo se entero de nosotros:</h6>
+                                <ul> 
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Forma Directa"  >
+                                        <input type="checkbox" id="chk_DI" 
+                                        name="checkFormaDirecta" (click)="selectKnown(1)" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_DI">DI</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Recomendado" >
+                                        <input type="checkbox" id="chk_RE"  (click)="selectKnown(2)" 
+                                        name="checkRecomendado" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_RE">RE</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Publicidad Radial"  >
+                                        <input type="checkbox" id="chk_PR"  (click)="selectKnown(3)" 
+                                        name="checkPublicidadRadial" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_PR">PR</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Publicidad por Volante"  >
+                                        <input type="checkbox" id="chk_PV"  (click)="selectKnown(4)" 
+                                        name="checkPublicidadVolante" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_PV">PV</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Publicidad por Internet"  >
+                                        <input type="checkbox" id="chk_PI"  (click)="selectKnown(5)" 
+                                        name="checkPublicidadInternet" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_PR">PI</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Ya es cliente"  >
+                                        <input type="checkbox" id="chk_YC"  (click)="selectKnown(6)" 
+                                        name="checkIsClient" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_YC">YC</label> 
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Fecha Cita:</label>
+                        <input  [(ngModel)]="parent.dateMedical" ngbDatepicker  #fi="ngbDatepicker" 
+                        (focus)="fi.open()" readonly="readonly" 
+                        name="dateMedical" max="15" maxlength="15" type="text"
+                        class="form-control form-control-sm" placeholder="" >
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >M&eacute;dico:</label>
+                        <select [(ngModel)] = "parent.inputMedic" name="parent.inputMedic"
+                        class="form-control form-control-sm" >
+                            <option *ngFor="let item of parent.listMedics" [ngValue]="item">
+                                {{item.names}}
+                            </option>           
+                        </select>  
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Estatura(mts):</label>
+                        <input type="number"  [(ngModel)]="parent.inputSize" name="inputSize" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Peso(Kg):</label>
+                        <input type="number" [(ngModel)]="parent.inputWeight" name="inputWeight" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Pr&oacute;xima Cita:</label>
+                        <input  [(ngModel)]="parent.nextDateMedical" 
+                        ngbDatepicker  #fn="ngbDatepicker" 
+                        (focus)="fn.open()" readonly="readonly" 
+                        name="nextDateMedical" max="15" maxlength="15" type="text"
+                        class="form-control form-control-sm" placeholder="" >
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Diagn&oacute;stico:</label>
+                        <select [(ngModel)] = "parent.inputDiagnostic" 
+                        name="inputDiagnostic" (ngModelChange) = "loadTreatment()"
+                        class="form-control form-control-sm"  >
+                            <option *ngFor="let item of parent.listDiagnostic" [ngValue]="item">
+                                {{item.name}}
+                            </option>           
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Tratamiento:</label>
+                        <select [(ngModel)] = "parent.inputTreatment" name="inputTreatment"
+                        class="form-control form-control-sm"  >
+                            <option *ngFor="let item of parent.listTreatments" [ngValue]="item.name">
+                                {{item.name}}
+                            </option>           
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Quimioterapia:</label>
+                        <input  [(ngModel)]="parent.inputQuimio" name="inputQuimio" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Vacuna:</label>
+                        <select [(ngModel)] = "parent.inputVaccine" 
+                        name="inputVaccine"  
+                        class="form-control form-control-sm"  >
+                            <option *ngFor="let item of parent.listVaccine" [ngValue]="item.name">
+                                {{item.name}}
+                            </option>           
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Monto:</label>
+                        <input type="number" [(ngModel)]="parent.inputPayment" name="inputPayment" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Temperatura(&deg;C):</label>
+                        <input type="number" [(ngModel)]="parent.inputTemperature" name="inputTemperature" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                            <label >Recomendaciones:</label>
+                            <textarea  
+                            [(ngModel)]="parent.inputRecomend" name="inputRecomend" 
+                            class="form-control form-control-sm" ></textarea>
+                        </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label>Signos Cl&iacute;nicos:</label>
+                        <br />
+                        <ul>
+                            <li class="col-md-4 item-clinic-sign" *ngFor="let item of parent.listSignClinic" >
+                                <input (click)="selectSignClinics(item)"  
+                                 type="checkbox" id="chk_{{item.idClinicSign}}" readonly="readonly" />
+                                &nbsp;&nbsp;
+                                <label for="chk_{{item.idClinicSign}}">{{item.name}}</label> 
+                            </li>
+                        </ul>  
+                    </div>
+                    <div class="col-md-12 col-sm-12" >
+                        <label>Otros:</label>
+                        <ul>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" id="chk_pulga" [(ngModel)]="parent.checkPulgas"
+                                name="checkPulgas" />
+                                &nbsp;&nbsp;
+                                <label for="chk_pulga">Pulgas</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" id="chk_garrapata" [(ngModel)]="parent.checkGarrapata"
+                                name="checkGarrapata" /> 
+                                &nbsp;&nbsp;
+                                <label for="chk_garrapata">Garrapatas</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" id="chk_hongo" [(ngModel)]="parent.checkHongo"
+                                name="checkHongo" />
+                                &nbsp;&nbsp;
+                                <label for="chk_hongo">Hongos</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" id="chk_otitis" [(ngModel)]="parent.checkOtitis"
+                                name="checkOtitis" />
+                                &nbsp;&nbsp;
+                                <label for="chk_otitis">Otitis</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" id="chk_banostd" [(ngModel)]="parent.checkBanioStandar"
+                                name="checkBanioStandar" />
+                                &nbsp;&nbsp;
+                                <label for="chk_banostd">Baño Est&aacute;ndar</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" id="chk_banomed" [(ngModel)]="parent.checkBanioMedicado"
+                                name="checkBanioMedicado" />
+                                &nbsp;&nbsp;
+                                <label for="chk_banomed">Ba&ntilde;o Medicado</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" id="chk_corte" [(ngModel)]="parent.checkCorte"
+                                name="checkCorte" />            
+                                &nbsp;&nbsp;                
+                                <label for="chk_corte">Corte</label> 
+                            </li>
+                            <li class="col-md-6 item-clinic-sign" >
+                                <input 
+                                 type="checkbox" id="chk_promo" [(ngModel)]="parent.checkPromoGratis"
+                                 name="checkPromoGratis" />
+                                 &nbsp;&nbsp;
+                                 <label for="chk_promo">Hizo Efectivo su promo gratis</label> 
+                            </li>
+                        </ul>
+                    </div>
+                        
+                </div>
+                </div>
+            </form>
+          </div>
+          <!-- READ ONLY -->
+          <div class="modal-body" *ngIf="parent.historyClinicDetailSelect!=null">
+            <form >
+                <div class="container-scroll">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 form-inline">
+                                <div class="form-group col-md-6 col-sm-6">
+                                <ul> 
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Vacunación Completa"  >
+                                        <input type="checkbox" disabled id="chk_O_V" [(ngModel)]="parent.checkVaccineCompleted"
+                                        name="checkVaccineCompleted"  />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_O_V">V</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Desparacitado" >
+                                        <input   disabled
+                                        type="checkbox" id="chk_O_D" [(ngModel)]="parent.checkDesparacitado"
+                                        name="checkDesparacitado" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_O_D">D</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Ya ha tenido Operaciones"  >
+                                        <input  disabled
+                                        type="checkbox" id="chk_O_O" [(ngModel)]="parent.checkWithOperacion"
+                                        name="checkWithOperacion" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_O_O">O</label> 
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <h6>C&oacute;mo se entero de nosotros:</h6>
+                                <ul> 
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Forma Directa"  >
+                                        <input type="checkbox" id="chk_DI"  disabled
+                                        name="checkFormaDirecta" [(ngModel)]="parent.checkFormaDirecta"  />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_DI">DI</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Recomendado" >
+                                        <input type="checkbox" id="chk_RE" disabled 
+                                        name="checkRecomendado" [(ngModel)]="parent.checkRecomendado" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_RE">RE</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Publicidad Radial"  >
+                                        <input type="checkbox" id="chk_PR"  disabled 
+                                        name="checkPublicidadRadial" [(ngModel)]="parent.checkPublicidadRadial" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_PR">PR</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Publicidad por Volante"  >
+                                        <input type="checkbox" id="chk_PV"  disabled 
+                                        name="checkPublicidadVolante" [(ngModel)]="parent.checkPublicidadVolante" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_PV">PV</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom"  ngbTooltip="Publicidad por Internet"  >
+                                        <input type="checkbox" id="chk_PI"  disabled 
+                                        name="checkPublicidadInternet" [(ngModel)]="parent.checkPublicidadInternet" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_PR">PI</label> 
+                                    </li>
+                                    <li class="item-opt" placement="bottom" ngbTooltip="Ya es cliente"  >
+                                        <input type="checkbox" id="chk_YC" disabled 
+                                        name="checkIsClient" [(ngModel)]="parent.checkIsClient" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="chk_YC">YC</label> 
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Fecha Cita:</label>
+                        <input  [(ngModel)]="parent.dateMedical" disabled ngbDatepicker  #fi="ngbDatepicker" 
+                        (focus)="fi.open()" readonly="readonly" 
+                        name="dateMedical" max="15" maxlength="15" type="text"
+                        class="form-control form-control-sm" placeholder="" >
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >M&eacute;dico:</label>
+                        <input [(ngModel)] = "parent.inputMedic.names" disabled name="parent.inputMedic"
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Estatura(mts):</label>
+                        <input type="number" disabled  [(ngModel)]="parent.inputSize" name="inputSize" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Peso(Kg):</label>
+                        <input type="number" disabled [(ngModel)]="parent.inputWeight" name="inputWeight" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Pr&oacute;xima Cita:</label>
+                        <input  [(ngModel)]="parent.nextDateMedical" 
+                        ngbDatepicker disabled  #fn="ngbDatepicker" 
+                        (focus)="fn.open()" readonly="readonly" 
+                        name="nextDateMedical" max="15" maxlength="15" type="text"
+                        class="form-control form-control-sm" placeholder="" >
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Diagn&oacute;stico:</label>
+                        <input disabled [(ngModel)] = "parent.inputDiagnostic.name" 
+                        name="inputDiagnostic" class="form-control form-control-sm"  />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Tratamiento:</label>
+                        <input disabled [(ngModel)] = "parent.inputTreatment" name="inputTreatment"
+                        class="form-control form-control-sm"  />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Quimioterapia:</label>
+                        <input disabled  [(ngModel)]="parent.inputQuimio" name="inputQuimio" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Vacuna:</label>
+                        <input disabled  [(ngModel)]="parent.inputVaccine" name="inputVaccine" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Monto:</label>
+                        <input type="number" disabled [(ngModel)]="parent.inputPayment" name="inputPayment" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label >Temperatura(&deg;C):</label>
+                        <input type="number" disabled [(ngModel)]="parent.inputTemperature" name="inputTemperature" 
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                            <label >Recomendaciones:</label>
+                            <textarea disabled [(ngModel)]="parent.inputRecomend" name="inputRecomend" 
+                            class="form-control form-control-sm" >
+                            </textarea>
+                        </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label>Signos Cl&iacute;nicos:</label>
+                        <br />
+                        <ul>
+                            <li class="col-md-4 item-clinic-sign" *ngFor="let item of parent.listSignClinic" >
+                                <input disabled [(ngModel)]="item.isChecked"
+                                 name="chk_{{item.idClinicSign}}" 
+                                 type="checkbox" id="chk_{{item.idClinicSign}}" readonly="readonly" />
+                                &nbsp;&nbsp;
+                                <label for="chk_{{item.idClinicSign}}">{{item.name}}</label> 
+                            </li>
+                        </ul>  
+                    </div>
+                    <div class="col-md-12 col-sm-12" >
+                        <label>Otros:</label>
+                        <ul>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" disabled id="chk_pulga" [(ngModel)]="parent.checkPulgas"
+                                name="checkPulgas" />
+                                &nbsp;&nbsp;
+                                <label for="chk_pulga">Pulgas</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" disabled id="chk_garrapata" [(ngModel)]="parent.checkGarrapata"
+                                name="checkGarrapata" /> 
+                                &nbsp;&nbsp;
+                                <label for="chk_garrapata">Garrapatas</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" disabled id="chk_hongo" [(ngModel)]="parent.checkHongo"
+                                name="checkHongo" />
+                                &nbsp;&nbsp;
+                                <label for="chk_hongo">Hongos</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" disabled id="chk_otitis" [(ngModel)]="parent.checkOtitis"
+                                name="checkOtitis" />
+                                &nbsp;&nbsp;
+                                <label for="chk_otitis">Otitis</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" disabled id="chk_banostd" [(ngModel)]="parent.checkBanioStandar"
+                                name="checkBanioStandar" />
+                                &nbsp;&nbsp;
+                                <label for="chk_banostd">Baño Est&aacute;ndar</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" disabled id="chk_banomed" [(ngModel)]="parent.checkBanioMedicado"
+                                name="checkBanioMedicado" />
+                                &nbsp;&nbsp;
+                                <label for="chk_banomed">Ba&ntilde;o Medicado</label> 
+                            </li>
+                            <li class="col-md-3 item-clinic-sign" >
+                                <input type="checkbox" disabled id="chk_corte" [(ngModel)]="parent.checkCorte"
+                                name="checkCorte" />            
+                                &nbsp;&nbsp;                
+                                <label for="chk_corte">Corte</label> 
+                            </li>
+                            <li class="col-md-6 item-clinic-sign" >
+                                <input type="checkbox" disabled [(ngModel)]="parent.checkPromoGratis"
+                                 name="checkPromoGratis" />
+                                 &nbsp;&nbsp;
+                                 <label for="chk_promo">Hizo Efectivo su promo gratis</label> 
+                            </li>
+                        </ul>
+                    </div>
+                        
+                </div>
+                </div>
+            </form>
+          </div>
+
+          <div class="modal-footer" *ngIf="parent.historyClinicDetailSelect==null">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                    Cancelar
+                </button>
+                <button type="button" (click)="save()" class="btn btn-info">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    Registrar
+                </button>  
+          </div>
+          <div class="modal-footer" *ngIf="parent.historyClinicDetailSelect!=null">
+                <button type="button" 
+                (click)="returnHistoryClinic()" class="btn btn-success">
+                    <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+                    Regresar
+                </button>  
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fa fa-window-close" aria-hidden="true"></i>
+                        Cerrar
+                </button>
+          </div>
+        </div>
+    </div>
+</div>

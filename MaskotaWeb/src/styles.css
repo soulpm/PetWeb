@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'Libertinus';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Libertinus'), url('/assets/fonts/LibertinusSerif-Bold.otf') format('truetype');
+}
+@font-face {
+    font-family: 'LibertinusMono';
+    font-style: normal;
+    font-weight: normal;
+    src: local('LibertinusMono'), url('/assets/fonts/LibertinusSerif-Regular.otf') format('truetype');
+}
+body{
+    font-family: 'LibertinusMono';
+}
+label   {font-family: 'LibertinusMono';}
+a       {font-family: 'LibertinusMono';}
+input   {font-family: 'LibertinusMono';}
+h5      {font-family: 'LibertinusMono';}   
+.modal-header
+{
+    background:#00a1df;
+}
+.modal-header h4{
+    color:#fff;
+}
+.modal-footer{
+
+}
+
+.icon-modal-title{
+    color:#fff;
+    margin-right: 5px;
+}
+
+
+.content-button{
+    margin-top:-5px;
+} 
+.ui-column{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#606c88+0,3f4c6b+100;Grey+3D+%232 */
+    background: #606c88!important; /* Old browsers */
+    background: -moz-linear-gradient(top, #606c88 0%, #3f4c6b 100%)!important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #606c88 0%,#3f4c6b 100%)!important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #606c88 0%,#3f4c6b 100%)!important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 )!important; /* IE6-9 */
+    color:#fff!important;
+    text-align: center!important;
+    font-size: 13px;
+}
+.title-page{
+    margin: 5px auto;
+}
+.title-page h5 {
+    font-weight: 600;
+    font-size: 27px;
+    color:#44330f;
+    font-family: 'Libertinus', serif;
+    /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,.5)), to(rgba(0,0,0,1)));
+    text-shadow: 0 1px 0 white;
+    */
+    padding:2px 5px 2px 2px; 
+    border-bottom:2px solid #44330f;
+    border-right: 2px solid #44330f;
+    box-shadow: 2px 3px #324960;
+}
+
+.alert-success{
+    background: #299a0b; /* Old browsers */
+    background: -moz-linear-gradient(top, #299a0b 0%, #299a0b 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #299a0b 0%,#299a0b 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #299a0b 0%,#299a0b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#299a0b', endColorstr='#299a0b',GradientType=0 ); /* IE6-9 */
+    color:#fff;
+    vertical-align: middle;
+    
+}
+.alert-danger{
+    background: #cc0000; /* Old browsers */
+    background: -moz-linear-gradient(top, #cc0000 0%, #cc0000 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #cc0000 0%,#cc0000 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #cc0000 0%,#cc0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0000', endColorstr='#cc0000',GradientType=0 ); /* IE6-9 */
+    vertical-align: middle;
+}
+.alert-warning{
+    background: #e5b929!important;
+    vertical-align: middle;
+}
+
+.alert strong{color:#fff; font-weight: 600; vertical-align: middle;}
+.alert p{color:#fff;font-weight: 200; vertical-align: middle;}

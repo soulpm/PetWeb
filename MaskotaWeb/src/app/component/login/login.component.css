@@ -1,0 +1,136 @@
+.background-body{
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#499bea+0,207ce5+100;Blue+3d+%237 */
+background: #499bea; /* Old browsers */
+background: -moz-linear-gradient(top, #499bea 0%, #207ce5 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #499bea 0%,#207ce5 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #499bea 0%,#207ce5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 ); /* IE6-9 */
+position: absolute;
+top:0%;
+left: 0%;
+width:100%;
+height: 100%;
+}
+.container-title-system{
+    font-size: 28px;
+    font-weight: 400;
+    color:#fff;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    height: 250px;
+    padding: 20px;  
+    
+}
+.container-background-image1{
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top:5%;
+    left: 5%;
+}
+.container-background-image2{
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top:5%;
+    right: 5%;
+}
+.container-background-image1 img{
+    border-radius:90%;
+    width:200px;
+    height: 200px; 
+}
+.container-background-image2 img{
+    border-radius:90%;
+    width:200px;
+    height: 200px; 
+}
+.img-mascota-2 {
+    position: relative;
+    left: 100px;
+}
+.img-mascota-5 {
+    position: relative;
+    right: 100px;
+}
+.container-login-control{
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 15px 15px 5px 15px;  
+    text-align:center;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eab92d+0,c79810+100;Yellow+3D+%232 */
+background: #eab92d; /* Old browsers */
+background: -moz-linear-gradient(top, #eab92d 0%, #c79810 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #eab92d 0%,#c79810 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #eab92d 0%,#c79810 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eab92d', endColorstr='#c79810',GradientType=0 ); /* IE6-9 */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+.container-login-control h3{
+    font-size: 25px;
+    font-weight: 600;
+    color:#fff;
+}
+.container-login-control p{
+    margin:-10px auto;
+    font-size: 16px;
+    font-weight: 400;
+    color:#fff;
+}
+.button-control{
+    width: 240px;
+    height: 35px;
+    border-radius: 15px;
+    margin: 10px 0 10px 0;
+    text-align: center;
+    background: #343a40;
+    color:#fff;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+}
+.container-controls{
+    text-align: center;
+
+}
+
+
+.alert-danger{
+    background:red;
+    color:#fff;
+    font-weight: 500;
+    padding: 3px 3px 3px 3px;
+    border-radius: 10px; 
+}
+.alert-danger strong{
+    margin: 3px 3px 3px 3px;
+}
+.alert-danger p{
+    margin: 3px 3px 3px 3px;
+}
+.alert-success{
+    background:#009900;
+    color:#fff;
+    font-weight: 500;
+    padding: 3px 3px 3px 3px;
+    border-radius: 10px; 
+}
+.alert-success strong{
+    margin: 3px 3px 3px 3px;
+}
+.alert-success p{
+    margin: 3px 3px 3px 3px;
+}
+.cnt-loading
+{
+    width:80px;
+    height: 80px;
+}
+
+

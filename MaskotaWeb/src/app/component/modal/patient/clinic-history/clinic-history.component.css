@@ -1,0 +1,36 @@
+.title-page-container{
+    background: #00b292;
+    color:#fff;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 3px 3px 3px 5px;
+    border-radius: 10px;
+    margin:5px auto;
+}
+.cnt-input{
+    
+}
+.cnt-input input{
+    background:#ececec;
+    margin:0 2px 0 2px;
+}
+.title-detail{
+    font-weight: 500;
+    font-size:20px;
+    color:#343a40;
+    border-bottom: 1px solid #343a40;
+}
+
+.text-sign{
+    width:180px;
+    word-wrap: break-word;
+}
+
+.ui-p-1{width:70px!important;text-align : center;}
+.ui-p-2{width:120px!important;text-align: center;}
+.ui-p-3{width:200px!important;text-align: left;word-wrap: break-word;}
+.ui-p-4{width:120px!important;text-align : center;}
+.ui-p-5{width:100px!important;text-align : right;}
+.ui-p-6{width:50px!important;text-align : center;}
+
+

@@ -1,0 +1,24 @@
+<header class="topbar">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FCD03F;color:#704817;">
+    <a class="navbar-brand" href="#">{{titleSystem}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {{menu.active}}" *ngFor="let menu of menuList" >
+          <a class="nav-link" [routerLink]="menu.urlLink"  >
+              <i class="{{menu.iconOption}}" style="color:#704817;" aria-hidden="true" ></i>  
+              {{menu.nameOption}}</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+          {{userAccount.names}}
+          &nbsp;&nbsp;
+          <a (click)="logout()"  style="color:white;text-decoration:none;cursor:pointer;">
+              <span >Cerrar Sesi&oacute;n</span>
+          </a>
+        </span>
+    </div>
+  </nav>
+</header>

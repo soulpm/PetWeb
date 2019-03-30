@@ -1,0 +1,17 @@
+.container-group{
+    border: 1px solid #343a40;
+    border-radius: 5px;
+    width:100%;
+    margin:3px 3px 3px 3px;
+    padding: 5px 5px 5px 5px;
+}
+.group-title{
+    width:101%;
+    background: #ececec;
+    color:#343a40;
+    font-weight: 600;
+    padding: 5px 5px 5px 5px;
+    position: relative;
+    top:-4px;
+    left: -4px;
+}

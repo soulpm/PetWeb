@@ -1,0 +1,92 @@
+<div class="col-sm-12 col-md-12">
+<div class="row col-md-12 col-sm-12 title-page">
+    <h5>{{titlePage}}</h5>
+</div>
+<br />
+<div class="row col-md-12 col-sm-12 filter-container">
+<form class="form-inline" action="#">    
+    <div class="form-group">
+      &nbsp;&nbsp;
+      <label for="input-user" >Nombre:</label>&nbsp;&nbsp;
+      <input id ="input-user" [(ngModel)] = "filterName" name="filterName" autofocus="autofocus" 
+      class="form-control form-control-sm" type="text"  />
+    </div>
+    <div class="form-group">
+        &nbsp;&nbsp;&nbsp;&nbsp;        
+        <label for ="input-role" >Tipo Mascota:</label>&nbsp;&nbsp;
+        <select [(ngModel)] = "filterKind" name="filterKind" style="width:150px;"
+         class="form-control select-picker form-control-sm" data-live-search="true" >
+            <option *ngFor="let item of listKind" [ngValue]="item">
+                {{item.name}}
+            </option>
+        </select>  
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" (click)="loadListPatients()" class="btn btn-info form-control-sm">
+            <div class="content-button">
+              <i class="fa fa-search" aria-hidden="true" ></i>&nbsp;Buscar
+            </div>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" (click)="showModalNew()" class="btn btn-info  form-control-sm">
+            <div class="content-button">
+              <i class="fa fa-plus-circle" aria-hidden="true" ></i>&nbsp;Nueva Mascota
+            </div>
+        </button>
+    </div>
+</form>
+</div>
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <br /> 
+    <p-table #dtPatients [value]="listPatient" [paginator]="true" [rows]="7" >
+        <ng-template pTemplate="header">
+            <tr>
+              <th class="ui-column ui-column-1">N°</th>
+              <th class="ui-column ui-column-2">Tipo Mascota</th>
+              <th class="ui-column ui-column-3">Nombres</th>
+              <th class="ui-column ui-column-4">Sexo</th>
+              <th class="ui-column ui-column-5">Raza</th>
+              <th class="ui-column ui-column-6">Color</th>
+              <th class="ui-column ui-column-7">Fecha Nacimiento</th>
+              <th class="ui-column ui-column-8">Edad</th>
+              <th class="ui-column ui-column-9">Opciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-patient>
+            <tr>
+              <td style="text-align:center;">{{patient.idPatient}}</td>
+              <td style="text-align:center;">{{patient.kindPatient.name}}</td>
+              <td>{{patient.names}}</td>
+              <td style="text-align:center;">{{patient.sex.name}}</td>
+              <td style="text-align:center;">{{patient.breed}}</td>
+              <td style="text-align:center;">{{patient.color}}</td>
+              <td style="text-align:center;">{{patient.dateBorn | date:'dd/MM/yyyy'}}</td> 
+              <td style="text-align:center;">{{patient.year}} a&ntilde;o(s) y {{patient.month}} meses</td> 
+              <td>
+                <button class="btn btn-info btn-sm" style="margin-top:3px;" (click)="showMedicalAppointment(patient)" 
+                placement="left" ngbTooltip="Registrar Atención"  >
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i></button>
+                &nbsp;  
+                <button class="btn btn-info btn-sm" style="margin-top:3px;" (click)="showModalEdit(patient)" 
+                placement="left" ngbTooltip="Modificar Datos"  >
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                &nbsp;
+                <button class="btn btn-info btn-sm" (click)="showHistoryClinic(patient)" 
+                  placement="left" ngbTooltip="Atenciones Clínicas" 
+                  style="margin-top:3px;" ><i class="fa fa-address-card" aria-hidden="true"></i></button>
+                  &nbsp;
+                <button class="btn btn-info btn-sm" (click)="showModalAssignOwner(patient)" 
+                  placement="left" ngbTooltip="Propietario" 
+                  style="margin-top:3px;" ><i class="fa fa-address-book" aria-hidden="true"></i></button>  
+              </td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
+  </div>
+</div>
+
+<app-modal-patient [parentObj] = "parentComponent"></app-modal-patient>
+<app-modal-asign-owner [parentObj] = "parentComponent" ></app-modal-asign-owner>
+<app-modal-medical-appointment [parentObj] = "parentComponent"></app-modal-medical-appointment>
+<app-clinic-history [parentObj] = "parentComponent"></app-clinic-history>

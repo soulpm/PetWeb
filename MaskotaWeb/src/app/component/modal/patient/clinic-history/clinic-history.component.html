@@ -1,0 +1,112 @@
+<div id="modalHistoryClinic" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i class="fa fa-2x fa-list-alt" aria-hidden="true" style="color:#fff;position:relative;top:3px;"></i>
+          &nbsp;&nbsp;
+          <h4 class="modal-title">{{parent.titleModal}}</h4>  
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+              <div class="row ">
+                 <span class="col-md-12 title-detail">Datos del Paciente:</span>
+                 <div class="col-md-4 cnt-input">
+                    <label for="inputBreed">Raza:</label>
+                    <input class="form-control form-control-sm" id="inputBreed" type="text" readonly="readonly" value="{{parent.entityEditParent.breed}}" />
+                    &nbsp;&nbsp;
+                  </div>
+                  <div class="col-md-4 cnt-input">
+                      <label for="inputColor">Color:</label>
+                      <input class="form-control form-control-sm" id="inputColor" type="text" readonly="readonly" value="{{parent.entityEditParent.color}}" />
+                      &nbsp;&nbsp;
+                  </div>
+                  <div class="col-md-4 cnt-input">
+                    <label for="inputSex">Sexo:</label>
+                    <input class="form-control form-control-sm" id="inputSex" type="text" readonly="readonly" value="Macho" *ngIf="parent.entityEditParent.sex.idSex==1" />
+                    <input class="form-control form-control-sm" id="inputSex" type="text" readonly="readonly" value="Hembra" *ngIf="parent.entityEditParent.sex.idSex==2" />
+                    &nbsp;&nbsp;
+                  </div>
+                  <div class="col-md-4 cnt-input">
+                      <label for="inputColor">Tipo:</label>
+                      <input class="form-control form-control-sm" id="inputColor" type="text" readonly="readonly" value="{{parent.entityEditParent.kindPatient.name}}" />
+                      &nbsp;&nbsp;
+                  </div>
+                  <div class="col-md-4 cnt-input">
+                      <label for="inputColor">Edad:</label>
+                      <input class="form-control form-control-sm" id="inputColor" type="text" readonly="readonly" value="{{parent.entityEditParent.year}} años y {{parent.entityEditParent.month}} meses" />
+                      &nbsp;&nbsp;
+                  </div>
+                  <div class="col-md-4 cnt-input">
+                      <label for="inputColor">Fecha Nacimiento:</label>
+                      <input class="form-control form-control-sm" id="inputColor" type="text" readonly="readonly" value="{{parent.entityEditParent.dateBorn | date:'dd/MM/yyyy'}}" />
+                      &nbsp;&nbsp;
+                  </div>
+                  <span class="col-md-12 title-detail">Historia Cl&iacute;nica:</span>
+              </div>
+              <div class="col-md-12 col-sm-12">
+              <br />
+              <p-table   [paginator]="true" [rows]="5"
+              [value]="parent.listHistoryClinic" [style]="{width:'100%'}"
+              [scrollable]="true" scrollHeight="300px"  selectionMode="single"  >
+              <ng-template pTemplate="colgroup" let-columns>
+                  <colgroup>
+                      <col *ngFor="let col of listReportColumns" class="{{col.class}}" style="width:200px">
+                  </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header">
+                  <tr style="text-align:center;" >
+                    <th class="{{col.class}}" *ngFor="let col of listReportColumns">
+                        {{col.nameColumn}}
+                    </th>
+                  </tr>   
+              </ng-template>
+              <ng-template pTemplate="body" let-item >
+                  <tr>
+                      <td class="ui-p-1">{{item.idHistory}}</td>
+                      <td class="ui-p-2">{{item.dateRegister | date:'dd/MM/yyyy'}}</td>
+                      <td class="ui-p-3">{{item.medic.names}}</td>
+                      <td class="ui-p-4">{{item.nextDate | date:'dd/MM/yyyy'}}</td>
+                      <td class="ui-p-5">S/. {{item.payment}}</td>
+                      <td class="ui-p-6">
+                        <i class="fa fa-search" aria-hidden="true" (click)="showModalDetailHistory(item)"
+                        placement="left" ngbTooltip="Ver Detalle" 
+                        ></i>
+                      </td>
+                      <!--
+                      <td class="ui-p-2"><div class="text-sign">{{item.idClinicSign}}</div></td>
+                      <td class="ui-p-5">{{item.stature}} mts</td>
+                      <td class="ui-p-6">{{item.weight}} kg</td>
+                      <td class="ui-p-6">{{item.temperature}} &deg;C</td>
+                      <td class="ui-p-6">{{item.recommend}}</td>
+                      <td class="ui-p-7">{{item.diagnostic}}</td>
+                      <td class="ui-p-8">{{item.nextDate | date:'dd/MM/yyyy'}}</td>
+                      <td class="ui-p-9">{{item.treatment}}</td>
+                      <td class="ui-p-10">{{item.vaccine}}</td>
+                      <td class="ui-p-11">{{item.chemotherapy}}</td>
+                      <td class="ui-p-12">{{item.vaccineCompleted}}</td>
+                      <td class="ui-p-13">{{item.desparacitado}}</td>
+                      <td class="ui-p-14">{{item.withOperation}}</td>
+                      <td class="ui-p-15">{{item.itvePulgas}}</td>
+                      <td class="ui-p-16">{{item.itveGarrapata}}</td>
+                      <td class="ui-p-17">{{item.itveHongos}}</td>
+                      <td class="ui-p-18">{{item.itveOtitis}}</td>
+                      <td class="ui-p-19">{{item.itveBanioStandar}}</td>
+                      <td class="ui-p-20">{{item.itveBanioMedicado}}</td>
+                      <td class="ui-p-21">{{item.itvePromoGratis}}</td>
+                      <td class="ui-p-22">{{item.itveCorte}}</td>
+                      -->
+                  </tr>
+                  </ng-template>
+              </p-table>
+              
+              
+        </div>
+        <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
